@@ -20,23 +20,20 @@ LABELS_PATH = "Pediatric Chest X-ray Pneumonia/labels.csv"
 
 df_preds = pd.read_csv(PRED_CSV_PATH)
 
-# Sidebar navigation
+# Sidebar
 st.sidebar.title("Pediatric Pneumonia Detection \n ## Biomedical Data Design Capstone")
 page = st.sidebar.radio("Navigate to", ["Image Explorer", "Dataset Information", "Model Information"])
 
-# ========== Page 1: Image Explorer ==========
+# Page 1: Image Explorer
 if page == "Image Explorer":
+
     st.header("Explore and Predict")
-    st.markdown("Click on a thumbnail below to view full image prediction and Grad-CAM. The images have been resized and normalized in preparation for classification")
+    st.markdown("Click on a thumbnail below to view full image prediction and Grad-CAM. The images have been rezised and normalized in preparation for classification")
 
     thumbnails = sorted(os.listdir(THUMBNAIL_DIR))
+    selected_img = st.session_state.get("selected_image", None)
 
-    # Initialize expander state
-    if "show_expander" not in st.session_state:
-        st.session_state.show_expander = True
-
-    # Image selector with auto-collapse after click
-    with st.expander("Show image thumbnails to select", expanded=st.session_state.show_expander):
+    with st.expander("Show image thumbnails to select", expanded=False):
         rows = len(thumbnails) // 6 + 1
         for i in range(rows):
             cols = st.columns(6)
@@ -54,10 +51,8 @@ if page == "Image Explorer":
                         """
                         if cols[j].button("", key=thumb_file):
                             st.session_state.selected_image = thumb_file
-                            st.session_state.show_expander = False  # Auto-collapse after selection
-                    cols[j].markdown(button_html, unsafe_allow_html=True)
+                        cols[j].markdown(button_html, unsafe_allow_html=True)
 
-    # Show prediction and Grad-CAM
     selected_img = st.session_state.get("selected_image", None)
 
     if selected_img:
@@ -75,7 +70,7 @@ if page == "Image Explorer":
         st.markdown(f"**Confidence:** {row['probability']} (Threshold: {row['threshold_used']})")
         st.markdown(f"**True Label:** {row['true_label_name']}")
 
-# ========== Page 2: Dataset Info ==========
+# Page 2: Dataset Info
 elif page == "Dataset Information":
     st.header("Dataset Information")
 
@@ -115,7 +110,7 @@ elif page == "Dataset Information":
     These splits were designed to maintain label balance and enable robust evaluation.
     """)
     
-# ========== Page 3: Model Information ==========
+# Page 3: Model Information
 elif page == "Model Information":
     st.header("Model Information")
 
