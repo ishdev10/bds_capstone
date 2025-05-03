@@ -104,8 +104,8 @@ elif page == "Dataset Information":
 
     ### Splits Used in This Project:
     - **Training Set**: 3,913 images  
-    - **Validation Set**: 841 images  
-    - **Test Set**: 852 images  
+    - **Validation Set**: 1129 images  
+    - **Test Set**: 564 images  
 
     These splits were designed to maintain label balance and enable robust evaluation.
     """)
