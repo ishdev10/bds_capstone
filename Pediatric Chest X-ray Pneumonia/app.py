@@ -7,16 +7,16 @@ from PIL import Image
 import base64
 
 # Load data
-PRED_CSV_PATH = "labels_and_predictions.csv"
-THUMBNAIL_DIR = "test_images_thumbnails"
-GRADCAM_DIR = "Gradcam images"
-CONF_MATRIX_PATH = "Metrics_Conf_Matrix.png"
-ROC_CURVE_PATH = "ROC_Curve.png"
-THRESH_OPTIM_PATH = "Threshold_Optim.png"
-ARCH_FILE = "pneunet_architecture.py"
-ARCH_IMG = "model_architecture.png"
-TRAIN_LOG = "pneumoniamnist_training_history.csv"
-LABELS_PATH = "labels.csv"
+PRED_CSV_PATH = "Pediatric Chest X-ray Pneumonia/labels_and_predictions.csv"
+THUMBNAIL_DIR = "Pediatric Chest X-ray Pneumonia/test_images_thumbnails"
+GRADCAM_DIR = "Pediatric Chest X-ray Pneumonia/Gradcam images"
+CONF_MATRIX_PATH = "Pediatric Chest X-ray Pneumonia/Metrics_Conf_Matrix.png"
+ROC_CURVE_PATH = "Pediatric Chest X-ray Pneumonia/ROC_Curve.png"
+THRESH_OPTIM_PATH = "Pediatric Chest X-ray Pneumonia/Threshold_Optim.png"
+ARCH_FILE = "Pediatric Chest X-ray Pneumonia/pneunet_architecture.py"
+ARCH_IMG = "Pediatric Chest X-ray Pneumonia/model_architecture.png"
+TRAIN_LOG = "Pediatric Chest X-ray Pneumonia/pneumoniamnist_training_history.csv"
+LABELS_PATH = "Pediatric Chest X-ray Pneumonia/labels.csv"
 
 df_preds = pd.read_csv(PRED_CSV_PATH)
 
