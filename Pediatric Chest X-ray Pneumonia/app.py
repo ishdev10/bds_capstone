@@ -160,7 +160,7 @@ elif page == "Model Information":
     st.subheader("Training History")
 
     # Plot image (loss/accuracy curves)
-    st.image("Training_Metrics.png", caption="Training Loss and Accuracy Over Epochs", use_container_width=True)
+    st.image("Pediatric Chest X-ray Pneumonia/Training_Metrics.png", caption="Training Loss and Accuracy Over Epochs", use_container_width=True)
 
     # Show all training log entries in dropdown
     with st.expander("See raw training metrics CSV"):
