@@ -21,7 +21,7 @@ LABELS_PATH = "Pediatric Chest X-ray Pneumonia/labels.csv"
 df_preds = pd.read_csv(PRED_CSV_PATH)
 
 # Sidebar
-st.sidebar.title("Pediatric Pneumonia Detection \n ## Biomedical Data Design Capstone")
+st.sidebar.title("Pediatric Pneumonia Detection \n ## **Isha Dev** - Biomedical Data Design Capstone")
 page = st.sidebar.radio("Navigate to", ["Image Explorer", "Dataset Information", "Model Information"])
 
 # Page 1: Image Explorer
