@@ -57,8 +57,8 @@ if page == "Image Explorer":
     selected_img = st.session_state.get("selected_image", None)
 
     if selected_img:
-        full_img_path = os.path.join("test_images_full", selected_img)
-        gradcam_path = os.path.join("Gradcam images", selected_img.replace("test_img", "test_gradcam"))
+        full_img_path = os.path.join("Pediatric Chest X-ray Pneumonia/test_images_full", selected_img)
+        gradcam_path = os.path.join("Pediatric Chest X-ray Pneumonia/Gradcam images", selected_img.replace("test_img", "test_gradcam"))
 
         col1, col2 = st.columns(2)
         with col1:
