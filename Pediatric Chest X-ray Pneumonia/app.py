@@ -93,7 +93,7 @@ elif page == "Dataset Information":
     - Image format: **JPEG**
     """)
 
-    with st.expander("View training samples montage", expanded=False):
+    with st.expander("View some training samples", expanded=False):
         st.image(MONTAGE_PATH, use_container_width=True)
     
     st.markdown("""
