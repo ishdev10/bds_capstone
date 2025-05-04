@@ -7,28 +7,27 @@ from PIL import Image
 import base64
 
 # Load data
-PRED_CSV_PATH = "labels_and_predictions.csv"
-THUMBNAIL_DIR = "test_images_thumbnails"
-GRADCAM_DIR = "Gradcam images"
-CONF_MATRIX_PATH = "Metrics_Conf_Matrix.png"
-ROC_CURVE_PATH = "ROC_Curve.png"
-THRESH_OPTIM_PATH = "Threshold_Optim.png"
-ARCH_FILE = "pneunet_architecture.py"
-ARCH_IMG = "model_architecture.png"
-TRAIN_LOG = "pneumoniamnist_training_history.csv"
-LABELS_PATH = "labels.csv"
+PRED_CSV_PATH = "Pediatric Chest X-ray Pneumonia/labels_and_predictions.csv"
+THUMBNAIL_DIR = "Pediatric Chest X-ray Pneumonia/test_images_thumbnails"
+GRADCAM_DIR = "Pediatric Chest X-ray Pneumonia/Gradcam images"
+CONF_MATRIX_PATH = "Pediatric Chest X-ray Pneumonia/Metrics_Conf_Matrix.png"
+ROC_CURVE_PATH = "Pediatric Chest X-ray Pneumonia/ROC_Curve.png"
+THRESH_OPTIM_PATH = "Pediatric Chest X-ray Pneumonia/Threshold_Optim.png"
+ARCH_FILE = "Pediatric Chest X-ray Pneumonia/pneunet_architecture.py"
+ARCH_IMG = "Pediatric Chest X-ray Pneumonia/model_architecture.png"
+TRAIN_LOG = "Pediatric Chest X-ray Pneumonia/pneumoniamnist_training_history.csv"
+LABELS_PATH = "Pediatric Chest X-ray Pneumonia/labels.csv"
 
 df_preds = pd.read_csv(PRED_CSV_PATH)
 
-# Sidebar navigation
-st.sidebar.title("Pediatric Pneumonia Detection \n ## Biomedical Data Design Capstone")
+# Sidebar
+st.sidebar.title("Pediatric Pneumonia Detection \n ## **Isha Dev** - Biomedical Data Design Capstone")
 page = st.sidebar.radio("Navigate to", ["Image Explorer", "Dataset Information", "Model Information"])
 
-# ========== Page 1: Image Explorer ==========
+# Page 1: Image Explorer
 if page == "Image Explorer":
-    import base64
 
-    st.header("Explore and Predict")
+    st.header("Image Explorer")
     st.markdown("Click on a thumbnail below to view full image prediction and Grad-CAM. The images have been rezised and normalized in preparation for classification")
 
     thumbnails = sorted(os.listdir(THUMBNAIL_DIR))
@@ -57,8 +56,8 @@ if page == "Image Explorer":
     selected_img = st.session_state.get("selected_image", None)
 
     if selected_img:
-        full_img_path = os.path.join("test_images_full", selected_img)
-        gradcam_path = os.path.join("Gradcam images", selected_img.replace("test_img", "test_gradcam"))
+        full_img_path = os.path.join("Pediatric Chest X-ray Pneumonia/test_images_full", selected_img)
+        gradcam_path = os.path.join("Pediatric Chest X-ray Pneumonia/Gradcam images", selected_img.replace("test_img", "test_gradcam"))
 
         col1, col2 = st.columns(2)
         with col1:
@@ -71,14 +70,14 @@ if page == "Image Explorer":
         st.markdown(f"**Confidence:** {row['probability']} (Threshold: {row['threshold_used']})")
         st.markdown(f"**True Label:** {row['true_label_name']}")
 
-# ========== Page 2: Dataset Info ==========
+# Page 2: Dataset Info
 elif page == "Dataset Information":
     st.header("Dataset Information")
 
     # Dataset description
     st.subheader("Overview")
     st.markdown("""
-    This project utilizes a curated dataset of **5,856 pediatric chest X-ray images** labeled as either **"PNEUMONIA"** or **"NORMAL"**. The dataset highlights a critical gap in pediatric imaging: while most existing datasets and diagnostic algorithms focus on adult physiology, pediatric patients present distinct anatomical and pathological features that necessitate dedicated models and data.
+    This project utilizes a dataset of **5,856 pediatric chest X-ray images** labeled as either `PNEUMONIA` or `NORMAL`. The dataset highlights a critical gap in pediatric imaging: while most existing datasets and diagnostic algorithms focus on adult physiology, pediatric patients present distinct anatomical and pathological features that necessitate dedicated models and data.
 
     ### Why Pediatric Imaging is Challenging
     - **Patient Compliance**: Young children often struggle to remain still during imaging, leading to motion blur or suboptimal positioning.
@@ -88,10 +87,9 @@ elif page == "Dataset Information":
     ### Composition
     - Total images: **5,856**
     - **Normal**: 1,583 images
-    - **Pneumonia**: 4,273 images (including both **bacterial** and **viral** cases, though not always separately labeled)
+    - **Pneumonia**: 4,273 images
     - Modality: **Anterior–posterior (AP) chest radiographs**
     - Image format: **JPEG**
-    - Typical resolution: **~1024×1024 pixels**, but varies slightly
 
     ### Source & Citation
     This dataset was originally published as part of a landmark study in *Cell* that demonstrated the power of deep learning in medical image diagnostics:
@@ -99,33 +97,34 @@ elif page == "Dataset Information":
     > **Kermany D, Goldbaum M, Cai W et al.** *Identifying Medical Diagnoses and Treatable Diseases by Image-Based Deep Learning*. Cell. 2018; 172(5):1122-1131.  
     > DOI: [10.1016/j.cell.2018.02.010](https://doi.org/10.1016/j.cell.2018.02.010)
 
-    **Access the dataset via:**  
-    [Kaggle Pediatric Pneumonia Chest X-ray Dataset](https://www.kaggle.com/datasets/andrewmvd/pediatric-pneumonia-chest-xray)  
-    [Mendeley Data DOI: 10.17632/rscbjbr9sj.2](http://dx.doi.org/10.17632/rscbjbr9sj.2)
+    Access the dataset via:
+    
+    > [Kaggle Pediatric Pneumonia Chest X-ray Dataset](https://www.kaggle.com/datasets/andrewmvd/pediatric-pneumonia-chest-xray)  
+    
+    > **Kermany D, Zhang K, Goldbaum M.** *Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification*. Mendeley Data. 2018; Version 2.
+    > DOI: [10.17632/rscbjbr9sj.2](http://dx.doi.org/10.17632/rscbjbr9sj.2)
 
     ### Splits Used in This Project:
-    - **Training Set**: 3,913 images  
-    - **Validation Set**: 841 images  
-    - **Test Set**: 852 images  
-
-    These splits were designed to maintain label balance and enable robust evaluation.
+    - **Training Set**: 3,913 images (70%) 
+    - **Validation Set**: 1129 images (20%)
+    - **Test Set**: 564 images (10%)
     """)
     
-# ========== Page 3: Model Information ==========
+# Page 3: Model Information
 elif page == "Model Information":
     st.header("Model Information")
 
     st.markdown("""
-    The model used in this application, `PneuNet`, is a custom Convolutional Neural Network (CNN) tailored for binary classification of pediatric chest X-ray images as **NORMAL** or **PNEUMONIA**.
+    The model used in this application, is a custom Convolutional Neural Network (CNN) named `PneuNet` tailored for binary classification of pediatric chest X-ray images as **NORMAL** or **PNEUMONIA**.
 
     It follows a deep feature extraction and classification design inspired by VGG-like architectures:
 
     #### Feature Extraction Blocks:
     The model consists of **4 convolutional blocks**, each containing:
     - Two `Conv2d` layers with kernel size 3×3 and padding=1
-    - `BatchNorm2d` for stabilization and faster convergence
-    - `ReLU` activations to introduce non-linearity
-    - `MaxPool2d` layers for downsampling (factor of 2)
+    - `BatchNorm2d` for stabilization
+    - `ReLU` activation to introduce non-linearity
+    - `MaxPool2d` layers for downsampling
     - `Dropout2d` layers to reduce overfitting
 
     Each block increases the channel depth as follows:
@@ -136,14 +135,14 @@ elif page == "Model Information":
 
     #### Classification Head:
     - `AdaptiveAvgPool2d` compresses each feature map to a 1×1 output
-    - Flattened into a vector
+    - Flattening into a vector
     - Passed through a `Linear` layer with 128 units + `ReLU` + `Dropout`
     - Final `Linear` layer outputs a single logit for binary classification
 
     #### Summary:
     - **Total Parameters:** ~18.8 million  
     - **Architecture Depth:** 8 Conv layers, 2 Fully Connected layers  
-    - **Purpose:** Efficiently extract hierarchical features for pediatric pneumonia detection
+    - **Purpose:** Extract hierarchical features for pediatric pneumonia detection
 
     """)
 
@@ -161,7 +160,7 @@ elif page == "Model Information":
     st.subheader("Training History")
 
     # Plot image (loss/accuracy curves)
-    st.image("Training_Metrics.png", caption="Training Loss and Accuracy Over Epochs", use_container_width=True)
+    st.image("Pediatric Chest X-ray Pneumonia/Training_Metrics.png", caption="Training Loss and Accuracy Over Epochs", use_container_width=True)
 
     # Show all training log entries in dropdown
     with st.expander("See raw training metrics CSV"):
