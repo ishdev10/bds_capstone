@@ -17,6 +17,7 @@ ARCH_FILE = "Pediatric Chest X-ray Pneumonia/pneunet_architecture.py"
 ARCH_IMG = "Pediatric Chest X-ray Pneumonia/model_architecture.png"
 TRAIN_LOG = "Pediatric Chest X-ray Pneumonia/pneumoniamnist_training_history.csv"
 LABELS_PATH = "Pediatric Chest X-ray Pneumonia/labels.csv"
+MONTAGE_PATH = "Pediatric Chest X-ray Pneumonia/sample_montage.png"
 
 df_preds = pd.read_csv(PRED_CSV_PATH)
 
@@ -90,7 +91,12 @@ elif page == "Dataset Information":
     - **Pneumonia**: 4,273 images
     - Modality: **Anterior–posterior (AP) chest radiographs**
     - Image format: **JPEG**
+    """)
 
+    with st.expander("View training samples montage", expanded=False):
+        st.image(MONTAGE_PATH, use_container_width=True)
+    
+    st.markdown("""
     ### Source & Citation
     This dataset was originally published as part of a landmark study in *Cell* that demonstrated the power of deep learning in medical image diagnostics:
 
@@ -154,13 +160,13 @@ elif page == "Model Information":
             st.code(code, language="python")
     
     with st.expander("View model diagram", expanded=False):
-        st.image(ARCH_IMG, caption="Model Architecture", use_container_width=True)
+        st.image(ARCH_IMG, use_container_width=True)
 
     # Training history
     st.subheader("Training History")
 
     # Plot image (loss/accuracy curves)
-    st.image("Pediatric Chest X-ray Pneumonia/Training_Metrics.png", caption="Training Loss and Accuracy Over Epochs", use_container_width=True)
+    st.image("Pediatric Chest X-ray Pneumonia/Training_Metrics.png", use_container_width=True)
 
     # Show all training log entries in dropdown
     with st.expander("See raw training metrics CSV"):
