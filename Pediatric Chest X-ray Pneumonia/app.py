@@ -29,7 +29,7 @@ page = st.sidebar.radio("Navigate to", ["Image Explorer", "Dataset Information",
 if page == "Image Explorer":
 
     st.header("Image Explorer")
-    st.markdown("Click on a thumbnail below to view full image prediction and Grad-CAM. The images have been rezised and normalized in preparation for classification")
+    st.markdown("Click on a thumbnail below to view full image prediction and Grad-CAM. The images have been resized and normalized in preparation for classification")
 
     thumbnails = sorted(os.listdir(THUMBNAIL_DIR))
     selected_img = st.session_state.get("selected_image", None)
